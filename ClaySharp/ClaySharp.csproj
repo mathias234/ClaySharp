@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>ClayUI</RootNamespace>
+        <RootNamespace>ClaySharp</RootNamespace>
         <PackageLicenseExpression>Zlib</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageVersion>0.0.1</PackageVersion>

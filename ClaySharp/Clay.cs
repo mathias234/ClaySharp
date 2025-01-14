@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
-using ClayUI.Interop;
+using ClaySharp.Interop;
 
-namespace ClayUI;
+namespace ClaySharp;
 
 public static partial class Clay
 {
@@ -9,18 +9,18 @@ public static partial class Clay
     {
         try
         {
-            Interop.ClayUI._OpenElement();
+            Interop.ClaySharp._OpenElement();
             foreach (var configuration in configurations)
             {
                 configuration.Invoke();
             }
-            Interop.ClayUI._ElementPostConfiguration(); 
+            Interop.ClaySharp._ElementPostConfiguration(); 
 
             block.Invoke();
         }
         finally
         {
-            Interop.ClayUI._CloseElement();
+            Interop.ClaySharp._CloseElement();
         }
     }
     
@@ -36,7 +36,7 @@ public static partial class Clay
     
     public static unsafe void Text(string text, Clay_TextElementConfig config)
     {
-        var textElementConfig = Interop.ClayUI._StoreTextElementConfig(config);
-        Interop.ClayUI._OpenTextElement(CreateClayString(text), textElementConfig);
+        var textElementConfig = Interop.ClaySharp._StoreTextElementConfig(config);
+        Interop.ClaySharp._OpenTextElement(CreateClayString(text), textElementConfig);
     }
 }

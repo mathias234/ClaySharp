@@ -32,11 +32,11 @@ clay
 --file
 clay/clay.h
 --methodClassName
-ClayUI
+ClaySharp
 --prefixStrip
 Clay_
 --namespace
-ClayUI.Interop
+ClaySharp.Interop
 --exclude
 CLAY__POINTER_ALIGNMENT
 *Wrapper

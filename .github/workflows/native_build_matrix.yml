@@ -93,8 +93,8 @@ jobs:
           find ./artifacts/windows-artifact-x64/ -type f -name "clay.dll" -exec cp {} ./ClaySharp/runtimes/win-x64/native/ \;
 
       - name: Package NuGet
-        run: dotnet pack ./ClaySharp/ClayUI.csproj --configuration Release --output ./cs-artifacts
+        run: dotnet pack ./ClaySharp/ClaySharp.csproj --configuration Release --output ./cs-artifacts
 
       - name: Publish NuGet
         run: |
-          dotnet nuget push ./cs-artifacts/ClayUI*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ./cs-artifacts/ClaySharp*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json

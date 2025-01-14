@@ -1,4 +1,4 @@
-namespace ClayUI.Interop;
+namespace ClaySharp.Interop;
 
 public unsafe partial struct Clay_ErrorHandler
 {

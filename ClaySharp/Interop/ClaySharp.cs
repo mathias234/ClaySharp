@@ -1,8 +1,8 @@
 using System.Runtime.InteropServices;
 
-namespace ClayUI.Interop;
+namespace ClaySharp.Interop;
 
-public static unsafe partial class ClayUI
+public static unsafe partial class ClaySharp
 {
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_MinMemorySize", ExactSpelling = true)]
     [return: NativeTypeName("uint32_t")]

@@ -1,14 +1,14 @@
-using ClayUI.Interop;
+using ClaySharp.Interop;
 
-namespace ClayUI;
+namespace ClaySharp;
 
 public static partial class Clay
 {
     public static Action Id(string id)
     {
         Clay_String clayString = CreateClayString(id);
-        var elementId = Interop.ClayUI._HashString(clayString, 0, 0);
-        return () => { Interop.ClayUI._AttachId(elementId); };
+        var elementId = Interop.ClaySharp._HashString(clayString, 0, 0);
+        return () => { Interop.ClaySharp._AttachId(elementId); };
     }
 
     public static unsafe Action Layout(
@@ -33,7 +33,7 @@ public static partial class Clay
             layoutDirection = direction
         };
 
-        return () => { Interop.ClayUI._AttachLayoutConfig(Interop.ClayUI._StoreLayoutConfig(layoutConfig)); };
+        return () => { Interop.ClaySharp._AttachLayoutConfig(Interop.ClaySharp._StoreLayoutConfig(layoutConfig)); };
     }
 
     public static unsafe Action Rectangle((float r, float g, float b, float a) color = default,
@@ -56,13 +56,13 @@ public static partial class Clay
 
         return () =>
         {
-            var storedConfig = Interop.ClayUI._StoreRectangleElementConfig(config);
+            var storedConfig = Interop.ClaySharp._StoreRectangleElementConfig(config);
             var union = new Clay_ElementConfigUnion()
             {
                 rectangleElementConfig = storedConfig
             };
 
-            Interop.ClayUI._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_RECTANGLE);
+            Interop.ClaySharp._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_RECTANGLE);
         };
     }
     
@@ -117,13 +117,13 @@ public static partial class Clay
 
         return () =>
         {
-            var storedConfig = Interop.ClayUI._StoreBorderElementConfig(config);
+            var storedConfig = Interop.ClaySharp._StoreBorderElementConfig(config);
             var union = new Clay_ElementConfigUnion()
             {
                 borderElementConfig = storedConfig
             };
 
-            Interop.ClayUI._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_BORDER_CONTAINER);
+            Interop.ClaySharp._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_BORDER_CONTAINER);
         };
     }
 
@@ -145,13 +145,13 @@ public static partial class Clay
 
         return () =>
         {
-            var storedConfig = Interop.ClayUI._StoreScrollElementConfig(config);
+            var storedConfig = Interop.ClaySharp._StoreScrollElementConfig(config);
             var union = new Clay_ElementConfigUnion()
             {
                 scrollElementConfig = storedConfig
             };
 
-            Interop.ClayUI._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_SCROLL_CONTAINER);
+            Interop.ClaySharp._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_SCROLL_CONTAINER);
         };
     }
     
@@ -180,13 +180,13 @@ public static partial class Clay
 
         return () =>
         {
-            var storedConfig = Interop.ClayUI._StoreFloatingElementConfig(config);
+            var storedConfig = Interop.ClaySharp._StoreFloatingElementConfig(config);
             var union = new Clay_ElementConfigUnion()
             {
                 floatingElementConfig = storedConfig
             };
 
-            Interop.ClayUI._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_FLOATING_CONTAINER);
+            Interop.ClaySharp._AttachElementConfig(union, Clay__ElementConfigType.CLAY__ELEMENT_CONFIG_TYPE_FLOATING_CONTAINER);
         };
     }
 }

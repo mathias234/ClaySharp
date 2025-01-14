@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
-using ClayUI.Interop;
+using ClaySharp.Interop;
 
-namespace ClayUI;
+namespace ClaySharp;
 
 public static partial class Clay
 {
@@ -45,7 +45,7 @@ public static partial class Clay
     {
         var clayStr = CreateClayString(str);
 
-        return Interop.ClayUI.GetElementId(clayStr);
+        return Interop.ClaySharp.GetElementId(clayStr);
     }
 
     public static unsafe void Initialize(Clay_Arena arena, Clay_Dimensions layoutDimensions, ErrorHandlerFunction errorHandlerFunction)
@@ -54,7 +54,7 @@ public static partial class Clay
             (delegate* unmanaged[Cdecl]<Clay_ErrorData, void>)
             Marshal.GetFunctionPointerForDelegate(errorHandlerFunction);
         
-        Interop.ClayUI.Initialize(arena, layoutDimensions, new Clay_ErrorHandler() { errorHandlerFunction = functionPointer});
+        Interop.ClaySharp.Initialize(arena, layoutDimensions, new Clay_ErrorHandler() { errorHandlerFunction = functionPointer});
     }
 
     
@@ -64,7 +64,7 @@ public static partial class Clay
             (delegate* unmanaged[Cdecl]<Clay_String*, Clay_TextElementConfig*, Clay_Dimensions>)
             Marshal.GetFunctionPointerForDelegate(measureTextFunction);
 
-        Interop.ClayUI.SetMeasureTextFunction(functionPointer);
+        Interop.ClaySharp.SetMeasureTextFunction(functionPointer);
     }
 
     
@@ -74,13 +74,13 @@ public static partial class Clay
             (delegate* unmanaged[Cdecl]<Clay_ElementId, Clay_PointerData, nint, void>)
             Marshal.GetFunctionPointerForDelegate(onHover);
 
-        Interop.ClayUI.OnHover(functionPointer, userData ?? IntPtr.Zero);
+        Interop.ClaySharp.OnHover(functionPointer, userData ?? IntPtr.Zero);
     }
     
     public static Clay_ScrollContainerData GetScrollContainerData(Clay_ElementId elementId)
     {
         // Pass the pointer to the unmanaged function
-        return Interop.ClayUI.GetScrollContainerData(elementId);
+        return Interop.ClaySharp.GetScrollContainerData(elementId);
     }
 
     public static unsafe Clay_String CreateClayString(string input)

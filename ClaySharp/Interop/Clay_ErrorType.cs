@@ -1,4 +1,4 @@
-namespace ClayUI.Interop;
+namespace ClaySharp.Interop;
 
 [NativeTypeName("unsigned int")]
 public enum Clay_ErrorType : uint

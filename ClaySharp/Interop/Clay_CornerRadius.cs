@@ -1,4 +1,4 @@
-namespace ClayUI.Interop;
+namespace ClaySharp.Interop;
 
 public partial struct Clay_CornerRadius
 {

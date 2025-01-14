@@ -1,4 +1,4 @@
-namespace ClayUI.Interop;
+namespace ClaySharp.Interop;
 
 [NativeTypeName("uint8_t")]
 public enum Clay__SizingType : byte

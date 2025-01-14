@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace ClayUI.Interop;
+namespace ClaySharp.Interop;
 
 [StructLayout(LayoutKind.Explicit)]
 public unsafe partial struct Clay_ElementConfigUnion
