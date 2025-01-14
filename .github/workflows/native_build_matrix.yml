@@ -23,7 +23,7 @@ jobs:
       run: gcc -shared -o libclay.so clay.c -fPIC
         
     - name: Upload Build Artifact (Ubuntu)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ubuntu-artifact
         path: ./libclay.so
@@ -46,13 +46,13 @@ jobs:
         & msbuild cl /LD clay.c /Fe:clay.dll /link /MACHINE:X64
 
     - name: Upload Build Artifact-x86 (Windows)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: windows-artifact-x86
         path: ./clay.dll
 
     - name: Upload Build Artifact-x64 (Windows)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: windows-artifact-x64
         path: ./clay.dll
@@ -70,7 +70,7 @@ jobs:
       run: gcc -shared -o libclay.dylib clay.c -fPIC
 
     - name: Upload Build Artifact (Arm64)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: arm64-artifact
         path: ./libclay.dylib
@@ -84,7 +84,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download all artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           path: ./artifacts
           
