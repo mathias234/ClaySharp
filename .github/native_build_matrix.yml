@@ -1,0 +1,107 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+        
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+        
+    # Ubuntu Steps
+    - name: Install Dependencies
+      run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev xorg-dev
+      
+    - name: Build Project
+      run: gcc -shared -o libclay.so clay.c -fPIC
+        
+    - name: Upload Build Artifact (Ubuntu)
+      uses: actions/upload-artifact@v2
+      with:
+        name: ubuntu-artifact
+        path: ./libclay.so
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build Project (Windows)
+      run: |
+        msbuild cl /LD clay.c /Fe:clay.dll /link /MACHINE:X86
+        & msbuild cl /LD clay.c /Fe:clay.dll /link /MACHINE:X64
+
+    - name: Upload Build Artifact-x86 (Windows)
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows-artifact-x86
+        path: ./clay.dll
+
+    - name: Upload Build Artifact-x64 (Windows)
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows-artifact-x64
+        path: ./clay.dll
+  build-arm64:
+    runs-on: macos-latest-xlarge
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+        
+    - name: Build Project
+      run: gcc -shared -o libclay.dylib clay.c -fPIC
+
+    - name: Upload Build Artifact (Arm64)
+      uses: actions/upload-artifact@v2
+      with:
+        name: arm64-artifact
+        path: ./libclay.dylib
+
+  publish-nuget:
+    needs: [build-ubuntu, build-windows, build-arm64]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: ./artifacts
+          
+      - name: Prepare NuGet Package
+        run: |
+          mkdir -p ./ClaySharp/runtimes/win-x64/native
+          mkdir -p ./ClaySharp/runtimes/win-x86/native
+          mkdir -p ./ClaySharp/runtimes/linux-x64/native
+          mkdir -p ./ClaySharp/runtimes/osx-arm64/native
+          find ./artifacts/ubuntu-artifact/ -type f -name "*.so" -exec cp {} ./ClaySharp/runtimes/linux-x64/native/ \;
+          find ./artifacts/arm64-artifact/ -type f -name "*.dylib" -exec cp {} ./ClaySharp/runtimes/osx-arm64/native/ \;
+          find ./artifacts/windows-artifact-x64/ -type f -name "clay.dll" -exec cp {} ./ClaySharp/runtimes/win-x64/native/ \;
+          find ./artifacts/windows-artifact-x86/ -type f -name "clay.dll" -exec cp {} ./ClaySharp/runtimes/win-x86/native/ \;
+
+      - name: Package NuGet
+        run: dotnet pack ./ClaySharp/ClayUI.csproj --configuration Release --output ./cs-artifacts
+
+        #- name: Publish NuGet
+        #  run: |
+        #    dotnet nuget push ./cs-artifacts/RecastSharp*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
