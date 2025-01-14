@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>ClayUI</RootNamespace>
-        <PackageLicenseExpression>zlib/libpng</PackageLicenseExpression>
+        <PackageLicenseExpression>Zlib</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageVersion>0.0.1</PackageVersion>
     </PropertyGroup>
@@ -21,4 +21,8 @@
     <ItemGroup>
         <None Include="runtimes\**" Pack="true" PackagePath="runtimes" />
     </ItemGroup>
+
+      <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+      </ItemGroup>
 </Project>
