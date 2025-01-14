@@ -8,6 +8,7 @@
         <PackageLicenseExpression>Zlib</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageVersion>0.0.1</PackageVersion>
+        <PackageId>Clay.Layout</PackageId>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
