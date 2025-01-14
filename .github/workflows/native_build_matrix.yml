@@ -42,8 +42,8 @@ jobs:
 
     - name: Build Project (Windows)
       run: |
-        msbuild cl /LD clay.c /Fe:clay.dll /link /MACHINE:X86
-        & msbuild cl /LD clay.c /Fe:clay.dll /link /MACHINE:X64
+        cl /LD clay.c /Fe:clay.dll /link /MACHINE:X86
+        & cl /LD clay.c /Fe:clay.dll /link /MACHINE:X64
 
     - name: Upload Build Artifact-x86 (Windows)
       uses: actions/upload-artifact@v4
