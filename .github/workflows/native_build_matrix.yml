@@ -95,6 +95,6 @@ jobs:
       - name: Package NuGet
         run: dotnet pack ./ClaySharp/ClayUI.csproj --configuration Release --output ./cs-artifacts
 
-        #- name: Publish NuGet
-        #  run: |
-        #    dotnet nuget push ./cs-artifacts/RecastSharp*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+      - name: Publish NuGet
+        run: |
+          dotnet nuget push ./cs-artifacts/ClayUI*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
