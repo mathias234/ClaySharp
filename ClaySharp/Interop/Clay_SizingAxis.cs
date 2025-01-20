@@ -4,7 +4,7 @@ namespace ClaySharp.Interop;
 
 public partial struct Clay_SizingAxis
 {
-    [NativeTypeName("__AnonymousRecord_clay_L281_C5")]
+    [NativeTypeName("__AnonymousRecord_clay_L288_C5")]
     public _size_e__Union size;
 
     public Clay__SizingType type;

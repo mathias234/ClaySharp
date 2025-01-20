@@ -59,10 +59,10 @@ public static unsafe partial class ClaySharp
     public static extern Clay_ScrollContainerData GetScrollContainerData(Clay_ElementId id);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_SetMeasureTextFunction", ExactSpelling = true)]
-    public static extern void SetMeasureTextFunction([NativeTypeName("Clay_Dimensions (*)(Clay_String *, Clay_TextElementConfig *)")] delegate* unmanaged[Cdecl]<Clay_String*, Clay_TextElementConfig*, Clay_Dimensions> measureTextFunction);
+    public static extern void SetMeasureTextFunction([NativeTypeName("Clay_Dimensions (*)(Clay_StringSlice, Clay_TextElementConfig *, uintptr_t)")] delegate* unmanaged[Cdecl]<Clay_StringSlice, Clay_TextElementConfig*, nuint, Clay_Dimensions> measureTextFunction, [NativeTypeName("uintptr_t")] nuint userData);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_SetQueryScrollOffsetFunction", ExactSpelling = true)]
-    public static extern void SetQueryScrollOffsetFunction([NativeTypeName("Clay_Vector2 (*)(uint32_t)")] delegate* unmanaged[Cdecl]<uint, Clay_Vector2> queryScrollOffsetFunction);
+    public static extern void SetQueryScrollOffsetFunction([NativeTypeName("Clay_Vector2 (*)(uint32_t, uintptr_t)")] delegate* unmanaged[Cdecl]<uint, nuint, Clay_Vector2> queryScrollOffsetFunction, [NativeTypeName("uintptr_t")] nuint userData);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_RenderCommandArray_Get", ExactSpelling = true)]
     public static extern Clay_RenderCommand* RenderCommandArray_Get(Clay_RenderCommandArray* array, [NativeTypeName("int32_t")] int index);

@@ -1,6 +1,6 @@
 --define-macro=__cplusplus=202002L
 --include-directory
-/usr/lib/clang/18/include
+/usr/lib/clang/19/include
 --additional
 -m64
 --config
