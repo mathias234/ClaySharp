@@ -6,7 +6,7 @@ namespace ClaySharp;
 public static partial class Clay
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate Clay_Dimensions MeasureTextFunction(Clay_StringSlice str, Clay_TextElementConfig* config, nuint userData, Clay_Dimensions dimensions);
+    public unsafe delegate Clay_Dimensions MeasureTextFunction(Clay_StringSlice str, Clay_TextElementConfig* config, nuint userData);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void OnHoverFunction(Clay_ElementId elementId, Clay_PointerData pointerData, IntPtr userData);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
