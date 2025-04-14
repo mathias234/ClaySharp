@@ -5,17 +5,12 @@ namespace ClaySharp;
 
 public static partial class Clay
 {
-    private static void ClayElementInternal(Action[] configurations, Action block)
+    private static void ClayElementInternal(Clay_ElementDeclaration config, Action block)
     {
         try
         {
             Interop.ClaySharp._OpenElement();
-            foreach (var configuration in configurations)
-            {
-                configuration.Invoke();
-            }
-            Interop.ClaySharp._ElementPostConfiguration(); 
-
+            Interop.ClaySharp._ConfigureOpenElement(config);
             block.Invoke();
         }
         finally
@@ -26,12 +21,12 @@ public static partial class Clay
     
     public static void Begin(Action block)
     {
-        ClayElementInternal([], block);
+        ClayElementInternal(new Clay_ElementDeclaration(), block);
     }
 
-    public static void Begin(Action[] configuration, Action block)
+    public static void Begin(Clay_ElementDeclaration config, Action block)
     {
-        ClayElementInternal(configuration, block);
+        ClayElementInternal(config, block);
     }
     
     public static unsafe void Text(string text, Clay_TextElementConfig config)

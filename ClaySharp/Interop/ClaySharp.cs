@@ -4,12 +4,17 @@ namespace ClaySharp.Interop;
 
 public static unsafe partial class ClaySharp
 {
+    public static void _SuppressUnusedLatchDefinitionVariableWarning()
+    {
+        (void)(CLAY__ELEMENT_DEFINITION_LATCH);
+    }
+
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_MinMemorySize", ExactSpelling = true)]
     [return: NativeTypeName("uint32_t")]
     public static extern uint MinMemorySize();
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_CreateArenaWithCapacityAndMemory", ExactSpelling = true)]
-    public static extern Clay_Arena CreateArenaWithCapacityAndMemory([NativeTypeName("uint32_t")] uint capacity, void* offset);
+    public static extern Clay_Arena CreateArenaWithCapacityAndMemory([NativeTypeName("size_t")] nuint capacity, void* memory);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_SetPointerState", ExactSpelling = true)]
     public static extern void SetPointerState(Clay_Vector2 position, bool pointerDown);
@@ -59,10 +64,10 @@ public static unsafe partial class ClaySharp
     public static extern Clay_ScrollContainerData GetScrollContainerData(Clay_ElementId id);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_SetMeasureTextFunction", ExactSpelling = true)]
-    public static extern void SetMeasureTextFunction([NativeTypeName("Clay_Dimensions (*)(Clay_StringSlice, Clay_TextElementConfig *, uintptr_t)")] delegate* unmanaged[Cdecl]<Clay_StringSlice, Clay_TextElementConfig*, nuint, Clay_Dimensions> measureTextFunction, [NativeTypeName("uintptr_t")] nuint userData);
+    public static extern void SetMeasureTextFunction([NativeTypeName("Clay_Dimensions (*)(Clay_StringSlice, Clay_TextElementConfig *, void *)")] delegate* unmanaged[Cdecl]<Clay_StringSlice, Clay_TextElementConfig*, void*, Clay_Dimensions> measureTextFunction, void* userData);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_SetQueryScrollOffsetFunction", ExactSpelling = true)]
-    public static extern void SetQueryScrollOffsetFunction([NativeTypeName("Clay_Vector2 (*)(uint32_t, uintptr_t)")] delegate* unmanaged[Cdecl]<uint, nuint, Clay_Vector2> queryScrollOffsetFunction, [NativeTypeName("uintptr_t")] nuint userData);
+    public static extern void SetQueryScrollOffsetFunction([NativeTypeName("Clay_Vector2 (*)(uint32_t, void *)")] delegate* unmanaged[Cdecl]<uint, void*, Clay_Vector2> queryScrollOffsetFunction, void* userData);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_RenderCommandArray_Get", ExactSpelling = true)]
     public static extern Clay_RenderCommand* RenderCommandArray_Get(Clay_RenderCommandArray* array, [NativeTypeName("int32_t")] int index);
@@ -96,50 +101,23 @@ public static unsafe partial class ClaySharp
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__OpenElement", ExactSpelling = true)]
     public static extern void _OpenElement();
 
+    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__ConfigureOpenElement", ExactSpelling = true)]
+    public static extern void _ConfigureOpenElement([NativeTypeName("const Clay_ElementDeclaration")] Clay_ElementDeclaration config);
+
+    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__ConfigureOpenElementPtr", ExactSpelling = true)]
+    public static extern void _ConfigureOpenElementPtr([NativeTypeName("const Clay_ElementDeclaration *")] Clay_ElementDeclaration* config);
+
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__CloseElement", ExactSpelling = true)]
     public static extern void _CloseElement();
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreLayoutConfig", ExactSpelling = true)]
-    public static extern Clay_LayoutConfig* _StoreLayoutConfig(Clay_LayoutConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__ElementPostConfiguration", ExactSpelling = true)]
-    public static extern void _ElementPostConfiguration();
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__AttachId", ExactSpelling = true)]
-    public static extern void _AttachId(Clay_ElementId id);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__AttachLayoutConfig", ExactSpelling = true)]
-    public static extern void _AttachLayoutConfig(Clay_LayoutConfig* config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__AttachElementConfig", ExactSpelling = true)]
-    public static extern void _AttachElementConfig(Clay_ElementConfigUnion config, Clay__ElementConfigType type);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreRectangleElementConfig", ExactSpelling = true)]
-    public static extern Clay_RectangleElementConfig* _StoreRectangleElementConfig(Clay_RectangleElementConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreTextElementConfig", ExactSpelling = true)]
-    public static extern Clay_TextElementConfig* _StoreTextElementConfig(Clay_TextElementConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreImageElementConfig", ExactSpelling = true)]
-    public static extern Clay_ImageElementConfig* _StoreImageElementConfig(Clay_ImageElementConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreFloatingElementConfig", ExactSpelling = true)]
-    public static extern Clay_FloatingElementConfig* _StoreFloatingElementConfig(Clay_FloatingElementConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreCustomElementConfig", ExactSpelling = true)]
-    public static extern Clay_CustomElementConfig* _StoreCustomElementConfig(Clay_CustomElementConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreScrollElementConfig", ExactSpelling = true)]
-    public static extern Clay_ScrollElementConfig* _StoreScrollElementConfig(Clay_ScrollElementConfig config);
-
-    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreBorderElementConfig", ExactSpelling = true)]
-    public static extern Clay_BorderElementConfig* _StoreBorderElementConfig(Clay_BorderElementConfig config);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__HashString", ExactSpelling = true)]
     public static extern Clay_ElementId _HashString(Clay_String key, [NativeTypeName("uint32_t")] uint offset, [NativeTypeName("uint32_t")] uint seed);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__OpenTextElement", ExactSpelling = true)]
     public static extern void _OpenTextElement(Clay_String text, Clay_TextElementConfig* textConfig);
+
+    [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__StoreTextElementConfig", ExactSpelling = true)]
+    public static extern Clay_TextElementConfig* _StoreTextElementConfig(Clay_TextElementConfig config);
 
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay__GetParentElementId", ExactSpelling = true)]
     [return: NativeTypeName("uint32_t")]

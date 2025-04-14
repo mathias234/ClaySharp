@@ -1,7 +1,7 @@
 namespace ClaySharp.Interop;
 
-[NativeTypeName("unsigned int")]
-public enum Clay_PointerDataInteractionState : uint
+[NativeTypeName("uint8_t")]
+public enum Clay_PointerDataInteractionState : byte
 {
     CLAY_POINTER_DATA_PRESSED_THIS_FRAME,
     CLAY_POINTER_DATA_PRESSED,

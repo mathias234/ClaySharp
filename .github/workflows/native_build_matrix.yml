@@ -43,7 +43,7 @@ jobs:
 
     - name: Build Project (Windows)
       run: |
-        cl /LD clay.c /Fe:clay.dll /link /MACHINE:X64
+        cl /DCLAY_DLL /LD clay.c /Fe:clay.dll /link /MACHINE:X64
 
     - name: Upload Build Artifact-x64 (Windows)
       uses: actions/upload-artifact@v4

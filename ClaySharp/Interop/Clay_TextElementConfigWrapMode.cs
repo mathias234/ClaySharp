@@ -1,7 +1,7 @@
 namespace ClaySharp.Interop;
 
-[NativeTypeName("unsigned int")]
-public enum Clay_TextElementConfigWrapMode : uint
+[NativeTypeName("uint8_t")]
+public enum Clay_TextElementConfigWrapMode : byte
 {
     CLAY_TEXT_WRAP_WORDS,
     CLAY_TEXT_WRAP_NEWLINES,

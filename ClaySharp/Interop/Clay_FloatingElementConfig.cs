@@ -6,13 +6,15 @@ public partial struct Clay_FloatingElementConfig
 
     public Clay_Dimensions expand;
 
-    [NativeTypeName("uint16_t")]
-    public ushort zIndex;
-
     [NativeTypeName("uint32_t")]
     public uint parentId;
 
-    public Clay_FloatingAttachPoints attachment;
+    [NativeTypeName("int16_t")]
+    public short zIndex;
+
+    public Clay_FloatingAttachPoints attachPoints;
 
     public Clay_PointerCaptureMode pointerCaptureMode;
+
+    public Clay_FloatingAttachToElement attachTo;
 }

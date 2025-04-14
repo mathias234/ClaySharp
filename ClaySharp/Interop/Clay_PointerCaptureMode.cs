@@ -1,7 +1,7 @@
 namespace ClaySharp.Interop;
 
-[NativeTypeName("unsigned int")]
-public enum Clay_PointerCaptureMode : uint
+[NativeTypeName("uint8_t")]
+public enum Clay_PointerCaptureMode : byte
 {
     CLAY_POINTER_CAPTURE_MODE_CAPTURE,
     CLAY_POINTER_CAPTURE_MODE_PASSTHROUGH,

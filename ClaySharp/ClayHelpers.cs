@@ -6,7 +6,7 @@ namespace ClaySharp;
 public static partial class Clay
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate Clay_Dimensions MeasureTextFunction(Clay_StringSlice str, Clay_TextElementConfig* config, nuint userData);
+    public unsafe delegate Clay_Dimensions MeasureTextFunction(Clay_StringSlice str, Clay_TextElementConfig* config, void* userData);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void OnHoverFunction(Clay_ElementId elementId, Clay_PointerData pointerData, IntPtr userData);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -58,10 +58,10 @@ public static partial class Clay
     }
 
     
-    public static unsafe void SetMeasureTextFunction(MeasureTextFunction measureTextFunction, nuint userData)
+    public static unsafe void SetMeasureTextFunction(MeasureTextFunction measureTextFunction, void* userData)
     {
         var functionPointer =
-            (delegate* unmanaged[Cdecl]<Clay_StringSlice, Clay_TextElementConfig*, nuint, Clay_Dimensions>)
+            (delegate* unmanaged[Cdecl]<Clay_StringSlice, Clay_TextElementConfig*, void*, Clay_Dimensions>)
             Marshal.GetFunctionPointerForDelegate(measureTextFunction);
 
         Interop.ClaySharp.SetMeasureTextFunction(functionPointer, userData);

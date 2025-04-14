@@ -1,7 +1,7 @@
 namespace ClaySharp.Interop;
 
-[NativeTypeName("unsigned int")]
-public enum Clay_ErrorType : uint
+[NativeTypeName("uint8_t")]
+public enum Clay_ErrorType : byte
 {
     CLAY_ERROR_TYPE_TEXT_MEASUREMENT_FUNCTION_NOT_PROVIDED,
     CLAY_ERROR_TYPE_ARENA_CAPACITY_EXCEEDED,
@@ -9,5 +9,6 @@ public enum Clay_ErrorType : uint
     CLAY_ERROR_TYPE_TEXT_MEASUREMENT_CAPACITY_EXCEEDED,
     CLAY_ERROR_TYPE_DUPLICATE_ID,
     CLAY_ERROR_TYPE_FLOATING_CONTAINER_PARENT_NOT_FOUND,
+    CLAY_ERROR_TYPE_PERCENTAGE_OVER_1,
     CLAY_ERROR_TYPE_INTERNAL_ERROR,
 }

@@ -1,8 +1,8 @@
 namespace ClaySharp.Interop;
 
-public unsafe partial struct Clay_TextElementConfig
+public partial struct Clay_TextRenderData
 {
-    public void* userData;
+    public Clay_StringSlice stringContents;
 
     public Clay_Color textColor;
 
@@ -17,8 +17,4 @@ public unsafe partial struct Clay_TextElementConfig
 
     [NativeTypeName("uint16_t")]
     public ushort lineHeight;
-
-    public Clay_TextElementConfigWrapMode wrapMode;
-
-    public Clay_TextAlignment textAlignment;
 }
