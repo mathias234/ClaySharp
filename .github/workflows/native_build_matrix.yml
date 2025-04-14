@@ -36,20 +36,24 @@ jobs:
       with:
         submodules: 'recursive'
 
+    - name: Apply Patch to clay.h
+      run: git apply patches/remove-stdcall.patch
+      shell: bash
+
     - name: Set up Visual Studio shell
       uses: egor-tensin/vs-shell@v2
       with:
         arch: x64
 
     - name: Build Project (Windows)
-      run: |
-        cl /DCLAY_DLL /LD clay.c /Fe:clay.dll /link /MACHINE:X64
+      run: cl /DCLAY_DLL /LD clay.c /Fe:clay.dll /link /MACHINE:X64
 
     - name: Upload Build Artifact-x64 (Windows)
       uses: actions/upload-artifact@v4
       with:
         name: windows-artifact-x64
         path: ./clay.dll
+
   build-arm64:
     runs-on: macos-latest-xlarge
 
