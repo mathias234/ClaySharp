@@ -4,11 +4,6 @@ namespace ClaySharp.Interop;
 
 public static unsafe partial class ClaySharp
 {
-    public static void _SuppressUnusedLatchDefinitionVariableWarning()
-    {
-        (void)(CLAY__ELEMENT_DEFINITION_LATCH);
-    }
-
     [DllImport("clay", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Clay_MinMemorySize", ExactSpelling = true)]
     [return: NativeTypeName("uint32_t")]
     public static extern uint MinMemorySize();
