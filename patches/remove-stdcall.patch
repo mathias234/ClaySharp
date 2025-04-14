@@ -1,0 +1,13 @@
+diff --git a/clay/clay.h b/clay/clay.h
+index 1423aaa..b5cc50c 100644
+--- a/clay/clay.h
++++ b/clay/clay.h
+@@ -43,7 +43,7 @@
+ #endif
+ 
+ #ifdef CLAY_DLL
+-#define CLAY_DLL_EXPORT __declspec(dllexport) __stdcall
++#define CLAY_DLL_EXPORT __declspec(dllexport)
+ #else
+ #define CLAY_DLL_EXPORT
+ #endif
